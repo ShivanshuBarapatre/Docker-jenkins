@@ -6,6 +6,10 @@ pipeline {
         }
     }
 
+    options {
+        skipDefaultCheckout()
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -28,9 +32,7 @@ pipeline {
 
     post {
         always {
-            node {
-                cleanWs()
-            }
+            deleteDir()   // safer than cleanWs in docker agent
         }
     }
 }
