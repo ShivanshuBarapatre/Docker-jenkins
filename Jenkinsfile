@@ -6,10 +6,6 @@ pipeline {
         }
     }
 
-    options {
-        skipDefaultCheckout()
-    }
-
     stages {
         stage('Checkout') {
             steps {
@@ -27,12 +23,6 @@ pipeline {
             steps {
                 sh 'pytest --cov=app --cov-report=xml tests/'
             }
-        }
-    }
-
-    post {
-        always {
-            deleteDir()   // safer than cleanWs in docker agent
         }
     }
 }
